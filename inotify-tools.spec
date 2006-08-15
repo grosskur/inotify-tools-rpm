@@ -1,13 +1,12 @@
 Name:           inotify-tools
-Version:        2.2
-Release:        3%{?dist}
+Version:        2.3
+Release:        1%{?dist}
 Summary:        Command line utilities for inotify
 
 Group:          Applications/System
 License:        GPL
 URL:            http://inotify-tools.sourceforge.net/
 Source0:        http://download.sf.net/inotify-tools/inotify-tools-%{version}.tar.gz
-Patch0:         inotify-tools-2.2.implicit_syscall.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 
@@ -19,7 +18,6 @@ and act upon filesystem events.
 
 %prep
 %setup -q
-%patch0 -p1
 
 
 %build
@@ -38,7 +36,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS COPYING NEWS README
+%doc AUTHORS COPYING ChangeLog NEWS README
 %{_bindir}/inotifywait
 %{_bindir}/inotifywatch
 %{_mandir}/man1/inotifywait.1*
@@ -46,6 +44,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Aug 15 2006 Dawid Gajownik <gajownik[AT]gmail.com> - 2.3-1
+- Update to 2.3
+- Drop implicit_syscall patch (fixed upstream)
+
 * Mon Jul 31 2006 Dawid Gajownik <gajownik[AT]gmail.com> - 2.2-3
 - Fix URL
 
