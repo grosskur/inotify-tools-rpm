@@ -1,5 +1,5 @@
 Name:           inotify-tools
-Version:        2.3
+Version:        2.4
 Release:        1%{?dist}
 Summary:        Command line utilities for inotify
 
@@ -44,6 +44,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Sep  9 2006 Dawid Gajownik <gajownik[AT]gmail.com> - 2.4-1
+- Update to 2.4
+
 * Tue Aug 15 2006 Dawid Gajownik <gajownik[AT]gmail.com> - 2.3-1
 - Update to 2.3
 - Drop implicit_syscall patch (fixed upstream)
