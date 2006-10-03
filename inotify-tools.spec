@@ -1,5 +1,5 @@
 Name:           inotify-tools
-Version:        2.5
+Version:        2.6
 Release:        1%{?dist}
 Summary:        Command line utilities for inotify
 
@@ -44,6 +44,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Oct  3 2006 Dawid Gajownik <gajownik[AT]gmail.com> - 2.6-1
+- Update to 2.6
+
 * Mon Oct  2 2006 Dawid Gajownik <gajownik[AT]gmail.com> - 2.5-1
 - Update to 2.5
 
