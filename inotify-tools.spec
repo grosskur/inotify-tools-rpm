@@ -1,5 +1,5 @@
 Name:           inotify-tools
-Version:        2.6
+Version:        3.6
 Release:        1%{?dist}
 Summary:        Command line utilities for inotify
 
@@ -9,19 +9,31 @@ URL:            http://inotify-tools.sourceforge.net/
 Source0:        http://download.sf.net/inotify-tools/inotify-tools-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
+BuildRequires:  autoconf
+BuildRequires:  doxygen
 
 %description
 inotify-tools is a set of command-line programs for Linux providing
 a simple interface to inotify. These programs can be used to monitor
 and act upon filesystem events.
 
+%package        devel
+Summary:        Headers and libraries for building apps that use libinotifytools
+Group:          Development/Libraries
+Requires:       %{name} = %{version}-%{release}
+
+%description    devel
+This package contains headers and libraries required to build applications
+that use the libinotifytools library.
 
 %prep
 %setup -q
 
 
 %build
-%configure --disable-dependency-tracking
+%configure \
+        --disable-dependency-tracking \
+        --disable-static
 make %{?_smp_mflags}
 
 
@@ -29,9 +41,22 @@ make %{?_smp_mflags}
 rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
 
+find %{buildroot} -type f -name "*.la" -exec rm -f {} ';'
+# We'll install documentation in the proper place
+rm -rf %{buildroot}/%{_datadir}/doc/
+
+
+%check
+make check
+
 
 %clean
 rm -rf %{buildroot}
+
+
+%post -p /sbin/ldconfig
+
+%postun -p /sbin/ldconfig
 
 
 %files
@@ -39,11 +64,32 @@ rm -rf %{buildroot}
 %doc AUTHORS COPYING ChangeLog NEWS README
 %{_bindir}/inotifywait
 %{_bindir}/inotifywatch
+%{_libdir}/libinotifytools.so.*
 %{_mandir}/man1/inotifywait.1*
 %{_mandir}/man1/inotifywatch.1*
 
+%files devel
+%defattr(-,root,root,-)
+%doc libinotifytools/src/doc/html/*
+%dir %{_includedir}/inotifytools/
+%{_includedir}/inotifytools/inotify.h
+%{_includedir}/inotifytools/inotify-nosys.h
+%{_includedir}/inotifytools/inotifytools.h
+%{_libdir}/libinotifytools.so
+
 
 %changelog
+* Sun Dec 17 2006 Dawid Gajownik <gajownik[AT]gmail.com> - 3.6-1
+- Update to 3.6
+
+* Tue Oct 31 2006 Dawid Gajownik <gajownik[AT]gmail.com> - 3.3-1
+- Update to 3.3
+- Add %%check stage
+
+* Sat Oct 28 2006 Dawid Gajownik <gajownik[AT]gmail.com> - 3.1-1
+- Update to 3.1
+- Add -devel subpackage
+
 * Tue Oct  3 2006 Dawid Gajownik <gajownik[AT]gmail.com> - 2.6-1
 - Update to 2.6
 
