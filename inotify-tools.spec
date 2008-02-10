@@ -1,11 +1,11 @@
 Name:           inotify-tools
-Version:        3.11
+Version:        3.13
 Release:        1%{?dist}
 Summary:        Command line utilities for inotify
 
 Group:          Applications/System
 License:        GPLv2
-URL:            http://inotify-tools.sourceforge.net/
+URL:		 http://inotify-tools.sourceforge.net/
 Source0:        http://download.sf.net/inotify-tools/inotify-tools-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -80,6 +80,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Feb 11 2008 Adel Gadllah <adel.gadllah@gmail.com> 3.13-1
+- Update to 3.13
+
 * Mon Sep 24 2007 Dawid Gajownik <gajownik[AT]gmail.com> - 3.11-1
 - Update to 3.11 (CVE-2007-5037, #299771)
 - Fix License tag
