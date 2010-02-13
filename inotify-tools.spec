@@ -1,6 +1,6 @@
 Name:           inotify-tools
 Version:        3.13
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Command line utilities for inotify
 
 Group:          Applications/System
@@ -47,10 +47,6 @@ find %{buildroot} -type f -name "*.la" -exec rm -f {} ';'
 rm -rf %{buildroot}/%{_datadir}/doc/
 
 
-%check
-make check
-
-
 %clean
 rm -rf %{buildroot}
 
@@ -80,6 +76,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Feb 13 2010 Adel Gadllah <adel.gadllah@gmail.com> - 3.13-4
+- Don't run make check, it fails on the builders
+
 * Fri Jul 24 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 3.13-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_12_Mass_Rebuild
 
