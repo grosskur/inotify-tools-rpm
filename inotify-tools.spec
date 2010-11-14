@@ -1,6 +1,6 @@
 Name:           inotify-tools
-Version:        3.13
-Release:        4%{?dist}
+Version:        3.14
+Release:        1%{?dist}
 Summary:        Command line utilities for inotify
 
 Group:          Applications/System
@@ -76,6 +76,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Nov 14 2010 Adel Gadllah <adel.gadllah@gmail.com> - 3.14-1
+- Update to 3.14
+
 * Sat Feb 13 2010 Adel Gadllah <adel.gadllah@gmail.com> - 3.13-4
 - Don't run make check, it fails on the builders
 
