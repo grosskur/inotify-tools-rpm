@@ -1,6 +1,6 @@
 Name:           inotify-tools
 Version:        3.14
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Command line utilities for inotify
 
 Group:          Applications/System
@@ -76,6 +76,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Jul 19 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 3.14-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
+
 * Fri Jan 13 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 3.14-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
 
