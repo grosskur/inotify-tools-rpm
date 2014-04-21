@@ -1,4 +1,20 @@
-Name:           inotify-tools
+%global p_vendor         hhvm
+%define _name            inotify-tools
+
+%if 0%{?p_vendor:1}
+  %global _orig_prefix   %{_prefix}
+  %global name_prefix    %{p_vendor}-
+
+  # Use the alternate locations for things.
+  %define _lib            lib 
+  %global _real_initrddir %{_initrddir}
+  %global _sysconfdir     %{_sysconfdir}/hhvm
+  %define _prefix         /opt/hhvm
+  %define _libdir         %{_prefix}/lib
+  %define _mandir         %{_datadir}/man
+%endif
+
+Name:           %{?name_prefix}%{_name}
 Version:        3.14
 Release:        6%{?dist}
 Summary:        Command line utilities for inotify
@@ -6,11 +22,12 @@ Summary:        Command line utilities for inotify
 Group:          Applications/System
 License:        GPLv2
 URL:		 http://inotify-tools.sourceforge.net/
-Source0:        http://download.sf.net/inotify-tools/inotify-tools-%{version}.tar.gz
+Source0:        http://pkgs.fedoraproject.org/repo/pkgs/inotify-tools/inotify-tools-%{version}.tar.gz/b43d95a0fa8c45f8bab3aec9672cf30c/inotify-tools-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  autoconf
 BuildRequires:  doxygen
+AutoReqProv: 0
 
 %description
 inotify-tools is a set of command-line programs for Linux providing
@@ -21,13 +38,14 @@ and act upon filesystem events.
 Summary:        Headers and libraries for building apps that use libinotifytools
 Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}
+AutoReqProv: 0
 
 %description    devel
 This package contains headers and libraries required to build applications
 that use the libinotifytools library.
 
 %prep
-%setup -q
+%setup -q -n %{_name}-%{version}
 
 
 %build
